@@ -1,0 +1,22 @@
+{
+  "name": "vk-bothelper",
+  "version": "1.0.0",
+  "description": "Бот для ВК который поможем вам своевременно читать сообщения группы",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MyDonate/VK-BotHelper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MyDonate/VK-BotHelper/issues"
+  },
+  "homepage": "https://github.com/MyDonate/VK-BotHelper#readme",
+  "dependencies": {
+    "vk-botlongpoll": "^0.5.4"
+  }
+}
