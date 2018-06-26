@@ -122,6 +122,8 @@ botHelper.onMessage(({reply, text, payload, from_id})=>{
 				}]
 			]
 		});
+
+		users.set(from_id, undefined);
 		return true;
 	}
 
