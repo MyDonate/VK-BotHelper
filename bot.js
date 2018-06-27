@@ -51,7 +51,7 @@ class BotHelper extends BotParent {
 const botHelper = new BotHelper({
 	'language': 'ru',
 	'token': '',
-	'groupId': 162550260,
+	'groupId': 168059774,
 	'commandDivider': '.',
 	'autoRead': true,
 	'getInfoAboutUser': true
@@ -83,14 +83,15 @@ var Buttons = {
 
 
 
-botHelper.onMessageWithoutEvent(async ({reply, text, payload, from_id})=>{
+botHelper.onMessageWithoutEvent(async ({reply, text, payload, from_id, id})=>{
 	if (users.get(from_id) && users.get(from_id).action == 'waitQuestion') {
 		
 		await reply('Куда вы хотите задать вопрос?', "", Buttons);
 
 		users.set(from_id, {
 			action: 'selectCategory',
-			question: text
+			question: text,
+			id
 		});
 	}
 	// reply(`Да`);
@@ -100,11 +101,13 @@ botHelper.onMessage(({reply, text, payload, from_id})=>{
 
 	if (users.get(from_id) && users.get(from_id).action == 'selectCategory'){
 		try{
+			var id = users.get(from_id).id;
 			var type = JSON.parse(payload).type;
-			GROUPS[type].members.forEach(id=>botHelper.api.sendMessage(id, `Получен новый вопрос по теме ${type}! Вопрос: \n\n ${users.get(from_id).question}`))
+			botHelper.api.vk.messagesSend({user_ids:GROUPS[type].members.join(','), message:`Новый вопрос по теме ${GROUPS[type].name}!`, forward_messages:id});
 
 		}
 		catch(e){
+			console.log(e);
 			reply(`Произошла ошибка: ${JSON.stringify(e)}`);
 		}
 		
